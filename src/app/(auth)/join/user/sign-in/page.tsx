@@ -8,41 +8,15 @@ const Page = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   console.log(showPassword);
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-[#F8F8F8] ">
-      <div className="max-w-md w-[22rem] relative flex flex-col p-4 rounded-md text-black bg-white">
+    <div className="w-full h-screen flex justify-center items-center bg-[#F8F8F8]">
+      <div className="max-w-md relative flex flex-col p-4 rounded-md text-black bg-white">
         <div className="text-2xl font-bold mb-2 text-[#1e0e4b] text-center">
-          Welcome to <span className="text-[#7747ff]">ServiceMan</span>
+          Welcome back to <span className="text-[#7747ff]">ServiceMan</span>
         </div>
         <div className="text-sm font-normal mb-4 text-center text-[#1e0e4b]">
-          Create new account
+          Log in to your account
         </div>
         <form className="flex flex-col gap-3">
-          <div className="block relative">
-            <label
-              htmlFor="email"
-              className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="email"
-              className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
-            />
-          </div>
-          <div className="block relative">
-            <label
-              htmlFor="password"
-              className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
-            >
-              Phone no
-            </label>
-            <input
-              type="text"
-              id="password"
-              className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
-            />
-          </div>
           <div className="block relative">
             <label
               htmlFor="password"
@@ -76,6 +50,11 @@ const Page = () => {
             </div>
           </div>
 
+          <div>
+            <a className="text-sm text-[#7747ff]" href="#">
+              Forgot your password?
+            </a>
+          </div>
           <button
             type="submit"
             className="bg-[#7747ff] w-full  m-auto px-6 py-2 rounded text-white text-sm font-normal"
@@ -84,9 +63,9 @@ const Page = () => {
           </button>
         </form>
         <div className="text-sm text-center mt-[1.6rem]">
-          Already have an account?{" "}
-          <Link className="text-sm text-[#7747ff]" href="/join/user/sign-in">
-            Login!
+          Don't have an account yet?{" "}
+          <Link className="text-sm text-[#7747ff]" href="/join/user/sign-up">
+            sign-up!
           </Link>
         </div>
       </div>
