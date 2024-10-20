@@ -57,7 +57,7 @@ const Page = () => {
         </div>
       </div>
       <Link
-        href={joinAs === 1 ? "/join/user/sign-up" : "join/serviceman/signup"}
+        href={joinAs === 1 ? "/join/user/sign-up" : "join/serviceman/sign-up"}
       >
         <button className="bg-blue-600 text-[1.1rem]  py-2 min-w-[25vw] text-white font-medium  max-md:max-w-[90vw] max-md:w-[70vw] rounded-xl">
           {joinAs
