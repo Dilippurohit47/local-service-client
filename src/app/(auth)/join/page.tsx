@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FiUsers } from "react-icons/fi";
@@ -57,13 +56,17 @@ const Page = () => {
           </h3>
         </div>
       </div>
-      <button className="bg-blue-600 text-[1.1rem]  py-2 min-w-[25vw] text-white font-medium  max-md:max-w-[90vw] max-md:w-[70vw] rounded-xl">
-        {joinAs
-          ? joinAs === 1
-            ? "Join as user"
-            : "Join as serviceman"
-          : "Create Account"}
-      </button>
+      <Link
+        href={joinAs === 1 ? "/join/user/sign-up" : "join/serviceman/signup"}
+      >
+        <button className="bg-blue-600 text-[1.1rem]  py-2 min-w-[25vw] text-white font-medium  max-md:max-w-[90vw] max-md:w-[70vw] rounded-xl">
+          {joinAs
+            ? joinAs === 1
+              ? "Join as user"
+              : "Join as serviceman"
+            : "Create Account"}
+        </button>
+      </Link>
       <h5>
         Already have an account?{" "}
         <Link className="text-blue-400" href={"/join/user/sign-in"}>
