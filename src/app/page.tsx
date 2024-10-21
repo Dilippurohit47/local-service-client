@@ -1,4 +1,7 @@
+import Homepage from "./pages/Homepage";
 
 export default function Home() {
-  return <main>heelo</main>;
+  return <main>
+    <Homepage />
+  </main>;
 }

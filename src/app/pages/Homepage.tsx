@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Homepage = () => {
   return (
-    <div>
-      
+    <div className="h-screen bg-black w-screen  ">
+      Home page
     </div>
-  )
-}
+  );
+};
 
-export default Homepage
+export default Homepage;
