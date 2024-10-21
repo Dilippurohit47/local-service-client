@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 
 import {
   Sidebar,
@@ -9,7 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 // Menu items.
 const items = [
@@ -38,30 +38,28 @@ const items = [
     url: "#",
     icon: Settings,
   },
-]
+];
 
 export function AppSidebar() {
   return (
-    <Sidebar collapsible="icon" >
+    <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>serviceman</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="flex flex-col">
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                <div key={item.title} className="flex items-center p-2">  
+                  <a href={item.url} className="flex items-center">
+                    <item.icon size={18} className="mr-4" />{" "}
+                    <span className="">{item.title}</span>
+                  </a>
+                </div>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

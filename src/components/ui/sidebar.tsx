@@ -3,7 +3,6 @@ import { MdOutlineMenu } from "react-icons/md";
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
-import { PanelLeft } from "lucide-react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -40,7 +39,6 @@ const SidebarContext = React.createContext<SidebarContext | null>(null);
 
 function useSidebar() {
   const context = React.useContext(SidebarContext);
-  console.log("context", context);
   if (!context) {
     throw new Error("useSidebar must be used within a Sidebar.");
   }
@@ -143,7 +141,7 @@ const SidebarProvider = React.forwardRef<
               } as React.CSSProperties
             }
             className={cn(
-              "group/sidebar-wrapper   flex min-h-svh w-full text-sidebar-foreground has-[[data-variant=inset]]:bg-sidebar",
+              "group/sidebar-wrapper  bg-[#FAFAFA] flex min-h-svh w-full text-sidebar-foreground has-[[data-variant=inset]]:bg-sidebar",
               className
             )}
             ref={ref}
@@ -236,7 +234,7 @@ const Sidebar = React.forwardRef<
         />
         <div
           className={cn(
-            "duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex",
+            "duration-200 fixed bg-red-500  inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex",
             side === "left"
               ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
               : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
@@ -250,7 +248,7 @@ const Sidebar = React.forwardRef<
         >
           <div
             data-sidebar="sidebar"
-            className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
+            className="flex h-full bg-white w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
           >
             {children}
           </div>
@@ -279,7 +277,7 @@ const SidebarTrigger = React.forwardRef<
       }}
     >
       <MdOutlineMenu size={22} className="" />
-      <span className="sr-only w-9  bg-green-500 ">Toggle Sidebar</span>
+      <span className="sr-only">Toggle Sidebar</span>
     </div>
   );
 });
@@ -439,7 +437,7 @@ const SidebarGroupLabel = React.forwardRef<
       ref={ref}
       data-sidebar="group-label"
       className={cn(
-        "duration-200 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring transition-[margin,opa] ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "duration-200 flex  h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring transition-[margin,opa] ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
         "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
         className
       )}
