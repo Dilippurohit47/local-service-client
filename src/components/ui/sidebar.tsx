@@ -269,14 +269,14 @@ const SidebarTrigger = React.forwardRef<
     <div
       data-sidebar="trigger"
       className={cn(
-        " h-10  flex items-center  cursor-pointer justify-center  w-20 px-3",
+        " h-10   flex items-center  cursor-pointer justify-center fixed z-40 left-10   w-20 px-3",
         className
       )}
       onClick={() => {
         toggleSidebar();
       }}
     >
-      <MdOutlineMenu size={22} className="" />
+      <MdOutlineMenu size={22} className="z-50" />
       <span className="sr-only">Toggle Sidebar</span>
     </div>
   );

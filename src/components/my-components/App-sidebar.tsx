@@ -45,7 +45,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>serviceman</SidebarGroupLabel>
+          <SidebarGroupLabel className=" text-[1.2rem]">serviceman</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="flex flex-col">
               {items.map((item) => (

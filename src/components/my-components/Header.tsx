@@ -5,16 +5,21 @@ import { useSidebar } from "@/components/ui/sidebar";
 import { Separator } from "@radix-ui/react-separator";
 import { CgProfile } from "react-icons/cg";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import SearchBar from "./SearchBar";
+import { MdOutlineMenu } from "react-icons/md";
 const Header = () => {
-  const { open } = useSidebar();
+  const { open, toggleSidebar } = useSidebar();
   return (
     <nav
       className={`bg-[#FAFAFA] fixed   top-0 right-0  flex justify-between items-center border-b border-opacity-50 pr-10 pl-5 py-2 transition-all duration-200 ${
-        open ? "w-[calc(100%-220px)]" : "w-[89.1rem]  "
+        open ? "w-[calc(100%-180px)]" : "w-[92.1rem]  "
       }`}
       style={{ transition: "width 0.2s ease" }}
     >
-      <h2 className="text-black font-normal">Serviceman</h2>
+      <div className="flex gap-5 items-center">
+        <MdOutlineMenu size={22} className="cursor-pointer" onClick={()=>toggleSidebar()} />
+        <SearchBar />
+      </div>
 
       <div className="flex gap-4 items-center  ">
         <div className="flex items-center gap-4  ">

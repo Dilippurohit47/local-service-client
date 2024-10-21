@@ -1,4 +1,4 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Header from "../components/my-components/Header";
@@ -34,7 +34,6 @@ export default function RootLayout({
         <SidebarProvider>
           <Header />
           <AppSidebar />
-          <SidebarTrigger />
           {children}
         </SidebarProvider>
       </body>
