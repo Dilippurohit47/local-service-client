@@ -11,16 +11,15 @@ const Header = () => {
   const { open, toggleSidebar } = useSidebar();
   return (
     <nav
-      className={`bg-[#FAFAFA] px-2 fixed top-0 right-0  flex md:justify-between items-center border-b border-opacity-50 md:pr-10 md:pl-5 max-md:justify-center py-2 transition-all duration-200 ${
+      className={`bg-[#FAFAFA]  fixed top-0 right-0  overflow-hidden flex md:justify-between items-center border-b border-opacity-50 md:pr-10 md:pl-5 px-2  py-2 transition-all duration-200 ${
         open ? "w-full  lg:w-[calc(100%-180px)]" : "w-full lg:w-[92.1rem]  "
       }`}
-      style={{ transition: "width 0.2s ease" }}
     >
 
 
 
 
-      <div className="flex gap-5 w-full      max-md:justify-between items-center ">
+      <div className="flex gap-5   items-center ">
         <MdOutlineMenu
           size={22}
           className="cursor-pointer"
@@ -37,7 +36,7 @@ const Header = () => {
           <IoMoonOutline size={22} className="cursor-pointer" />
           <div className="relative">
             <IoIosNotificationsOutline size={22} className="cursor-pointer " />
-            <span className="bg-red-500 h-4 w-4   -top-1 -right-1 text-[10px] text-center text-white rounded-full  absolute">
+            <span className="h-4 w-4   -top-1 -right-1 text-[10px] text-center text-white rounded-full  absolute">
               4
             </span>
           </div>

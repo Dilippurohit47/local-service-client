@@ -46,14 +46,14 @@ export function AppSidebar() {
   const { toggleSidebar } = useSidebar();
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" className="max-md:hidden" >
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className=" text-[1.2rem]">
             serviceman
           </SidebarGroupLabel>
           <div
-            className="absolute top-5 right-3 cursor-pointer"
+            className="absolute top-5 right-3 cursor-pointer max-md:block hidden"
             onClick={() => toggleSidebar()}
           >
             <RxCross1 />
