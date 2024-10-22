@@ -1,27 +1,38 @@
 "use client";
-import React from "react";
-import { IoMoonOutline } from "react-icons/io5";
 import { useSidebar } from "@/components/ui/sidebar";
 import { Separator } from "@radix-ui/react-separator";
+import { Settings } from "lucide-react";
 import { CgProfile } from "react-icons/cg";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import SearchBar from "./SearchBar";
+import { IoMoonOutline } from "react-icons/io5";
 import { MdOutlineMenu } from "react-icons/md";
+import SearchBar from "./SearchBar";
 const Header = () => {
   const { open, toggleSidebar } = useSidebar();
   return (
     <nav
-      className={`bg-[#FAFAFA] fixed   top-0 right-0  flex justify-between items-center border-b border-opacity-50 pr-10 pl-5 py-2 transition-all duration-200 ${
-        open ? "w-[calc(100%-180px)]" : "w-[92.1rem]  "
+      className={`bg-[#FAFAFA] px-2 fixed top-0 right-0  flex md:justify-between items-center border-b border-opacity-50 md:pr-10 md:pl-5 max-md:justify-center py-2 transition-all duration-200 ${
+        open ? "w-full  lg:w-[calc(100%-180px)]" : "w-full lg:w-[92.1rem]  "
       }`}
       style={{ transition: "width 0.2s ease" }}
     >
-      <div className="flex gap-5 items-center">
-        <MdOutlineMenu size={22} className="cursor-pointer" onClick={()=>toggleSidebar()} />
+
+
+
+
+      <div className="flex gap-5 w-full      max-md:justify-between items-center ">
+        <MdOutlineMenu
+          size={22}
+          className="cursor-pointer"
+          onClick={() => toggleSidebar()}
+        />
         <SearchBar />
+        <div className="hidden max-md:block">
+          <Settings size={20} />
+        </div>
       </div>
 
-      <div className="flex gap-4 items-center  ">
+      <div className="md:flex gap-4 items-center hidden  ">
         <div className="flex items-center gap-4  ">
           <IoMoonOutline size={22} className="cursor-pointer" />
           <div className="relative">

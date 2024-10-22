@@ -1,3 +1,5 @@
+"use client";
+
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 
 import {
@@ -7,10 +9,10 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import { RxCross1 } from "react-icons/rx";
+import { useSidebar } from "../ui/sidebar";
 // Menu items.
 const items = [
   {
@@ -41,15 +43,25 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const { toggleSidebar } = useSidebar();
+
   return (
     <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className=" text-[1.2rem]">serviceman</SidebarGroupLabel>
+          <SidebarGroupLabel className=" text-[1.2rem]">
+            serviceman
+          </SidebarGroupLabel>
+          <div
+            className="absolute top-5 right-3 cursor-pointer"
+            onClick={() => toggleSidebar()}
+          >
+            <RxCross1 />
+          </div>
           <SidebarGroupContent>
             <SidebarMenu className="flex flex-col">
               {items.map((item) => (
-                <div key={item.title} className="flex items-center p-2">  
+                <div key={item.title} className="flex items-center p-2">
                   <a href={item.url} className="flex items-center">
                     <item.icon size={18} className="mr-4" />{" "}
                     <span className="">{item.title}</span>

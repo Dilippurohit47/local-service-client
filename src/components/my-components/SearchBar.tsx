@@ -5,7 +5,7 @@ const SearchBar = () => {
     <div className="relative">
       <input
         placeholder="Search..."
-        className="input shadow-lg focus:border-2 border-gray-300 px-5 py-2 rounded-xl w-64 transition-all focus:w-72 outline-none"
+        className="input shadow-lg focus:border-2 border-gray-300 px-5 py-2 rounded-xl md:w-64 w-96 max-sm:w-56   transition-all md:focus:w-72 outline-none"
         name="search"
         type="text"
       />
