@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { IoEyeOffSharp } from "react-icons/io5";
 import { FaRegEye } from "react-icons/fa";
 import Link from "next/link";
+import { UserSignIn } from "@/app/actions/serverActions";
 
 const Page = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  console.log(showPassword);
   return (
     <div className="w-full h-screen flex justify-center items-center bg-[#F8F8F8]">
       <div className="max-w-md relative flex flex-col p-4 rounded-md text-black bg-white">
@@ -16,7 +16,7 @@ const Page = () => {
         <div className="text-sm font-normal mb-4 text-center text-[#1e0e4b]">
           Log in to your account
         </div>
-        <form className="flex flex-col gap-3">
+        <form className="flex flex-col gap-3" action={UserSignIn}>
           <div className="block relative">
             <label
               htmlFor="password"
@@ -25,6 +25,7 @@ const Page = () => {
               Email
             </label>
             <input
+              name="email"
               type="text"
               id="password"
               className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
@@ -38,6 +39,7 @@ const Page = () => {
               Password
             </label>
             <input
+              name="password"
               type={showPassword ? "text" : "password"}
               id="password"
               className="rounded border relative border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
