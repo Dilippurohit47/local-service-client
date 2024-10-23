@@ -1,10 +1,10 @@
 "use client";
 import ServicamanCard from "@/components/my-components/ServicamanCard";
 import { login, saveUser } from "@/lib/features/UserReducer";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useAppDispatch } from "@/lib/hooks";
 import { fetcher } from "@/lib/utils";
 import { Star } from "lucide-react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import useSWR from "swr";
 
 const Homepage = () => {
@@ -22,7 +22,7 @@ const Homepage = () => {
   }, [data]);
 
   return (
-    <div className="h-screen mt-16 bg-[#FAFAFA] w-[95vw] max-md:w-screen    ">
+    <div className="h-screen mt-16 bg-[#FAFAFA] w-[95vw] overflow-hidden  max-md:w-screen z-10    ">
       <h1 className="font-semibold ml-4 md:text-3xl text-xl flex items-center gap-2  ">
         Best Service Providers{" "}
         <Star
@@ -30,33 +30,13 @@ const Homepage = () => {
           size={18}
         />
       </h1>
-      <div className="md:px-4 py-2 flex gap-8 max-md:flex-col   w-full max-md:gap-4 items-center">
+      <div className="md:px-4 py-2 overflow-x-auto no-scrollbar flex gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5   w-full max-md:gap-4 items-center">
         <ServicamanCard />
         <ServicamanCard />
         <ServicamanCard />
-      </div>
-
-      <div>
-        <h1 className="font-semibold ml-4 md:text-3xl text-xl ">Plumbers</h1>
-        <div className="md:px-4 py-2 flex gap-8 max-md:flex-col   w-full max-md:gap-4 items-center">
-          <ServicamanCard />
-          <ServicamanCard />
-          <ServicamanCard />
-          <ServicamanCard />
-          <ServicamanCard />
-        </div>
-      </div>
-      <div>
-        <h1 className="font-semibold ml-4 md:text-3xl text-xl ">
-          Electricians
-        </h1>
-        <div className="md:px-4 py-2 flex gap-8 max-md:flex-col   w-full max-md:gap-4 items-center">
-          <ServicamanCard />
-          <ServicamanCard />
-          <ServicamanCard />
-          <ServicamanCard />
-          <ServicamanCard />
-        </div>
+        <ServicamanCard />
+        <ServicamanCard />
+        <ServicamanCard />
       </div>
     </div>
   );
