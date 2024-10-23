@@ -5,6 +5,9 @@ import Header from "../components/my-components/Header";
 import "./globals.css";
 import { AppSidebar } from "@/components/my-components/App-sidebar";
 import { Toaster } from "sonner";
+import StoreProvider from "./StoreProvider";
+
+import Store from "../lib/store"
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -27,18 +30,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {" "}
-        <SidebarProvider>
-          <Header />
-          <AppSidebar />
-          {children}
-        </SidebarProvider>
-        <Toaster />
-      </body>
-    </html>
+    <StoreProvider store={Store}> 
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {" "}
+          <SidebarProvider>
+            <Header />
+            <AppSidebar />
+            {children}
+          </SidebarProvider>
+          <Toaster />
+        </body>
+      </html>
+    </StoreProvider>
   );
 }

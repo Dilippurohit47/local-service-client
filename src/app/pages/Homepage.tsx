@@ -1,4 +1,6 @@
+"use client";
 import ServicamanCard from "@/components/my-components/ServicamanCard";
+
 import { Star } from "lucide-react";
 import React from "react";
 
@@ -29,7 +31,9 @@ const Homepage = () => {
         </div>
       </div>
       <div>
-        <h1 className="font-semibold ml-4 md:text-3xl text-xl ">Electricians</h1>
+        <h1 className="font-semibold ml-4 md:text-3xl text-xl ">
+          Electricians
+        </h1>
         <div className="md:px-4 py-2 flex gap-8 max-md:flex-col   w-full max-md:gap-4 items-center">
           <ServicamanCard />
           <ServicamanCard />
