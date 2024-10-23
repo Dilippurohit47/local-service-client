@@ -3,7 +3,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useAppSelector } from "@/lib/hooks";
 import { Separator } from "@radix-ui/react-separator";
-import { Settings } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoMoonOutline } from "react-icons/io5";
