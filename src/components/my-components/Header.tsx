@@ -15,7 +15,7 @@ import Link from "next/link";
 const Header = () => {
   const { open, toggleSidebar } = useSidebar();
   const [showBox, setShowBox] = useState<boolean>(false);
-  const user = useAppSelector((state) => state.userReducer.User);
+  const user = useAppSelector((state) => state.userReducer.user);
   const boxref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

@@ -9,13 +9,13 @@ interface User {
 interface CounterState {
   userToken: string;
   isloggedIn: boolean;
-  User: User | null;
+  user: User | null;
 }
 
 const initialState: CounterState = {
   userToken: "0",
   isloggedIn: false,
-  User: null,
+  user: null,
 };
 
 export const userReducer = createSlice({
@@ -25,16 +25,17 @@ export const userReducer = createSlice({
     logout: (state) => {
       state.userToken = "";
       state.isloggedIn = false;
+      state.user = null;
     },
     login: (state, payload: string) => {
       state.userToken = payload.payload;
       state.isloggedIn = true;
     },
     saveUser: (state, payload: string) => {
-      state.User = payload.payload;
+      state.user = payload.payload;
     },
   },
 });
 
-export const { logout, login,saveUser } = userReducer.actions;
+export const { logout, login, saveUser } = userReducer.actions;
 export default userReducer.reducer;

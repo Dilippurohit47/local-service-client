@@ -1,18 +1,6 @@
 "use client";
 
 import {
-  Bell,
-  Calendar,
-  Home,
-  Inbox,
-  LogOut,
-  Moon,
-  PowerOffIcon,
-  Search,
-  Settings,
-} from "lucide-react";
-import { CgProfile } from "react-icons/cg";
-import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
@@ -20,20 +8,38 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
 } from "@/components/ui/sidebar";
+import { Bell, Home, Inbox, LogIn, LogOut, Moon } from "lucide-react";
+import { CgProfile } from "react-icons/cg";
 
+import { logout } from "@/lib/features/UserReducer";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RxCross1 } from "react-icons/rx";
+import { toast } from "sonner";
 import { useSidebar } from "../ui/sidebar";
-import { useAppSelector } from "@/lib/hooks";
-// Menu items.
 
 export function AppSidebar() {
   const { toggleSidebar } = useSidebar();
-  const getuser = () => {
-    const user = useAppSelector((state) => state.userReducer.User);
-    return user?.name;
-  };
-  const logOut = () => {
-    alert("ok");
+  const user = useAppSelector((state) => state.userReducer.user);
+
+  const dispatch = useAppDispatch();
+  const logOut = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER}/api/v1/user/sign-out`,
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
+      const data = await res.json();
+
+      if (data && data.success) {
+        dispatch(logout());
+        toast.success(data.message);
+      }
+    } catch (error) {
+      toast.error("Internal server error");
+    }
   };
 
   const items = [
@@ -44,32 +50,19 @@ export function AppSidebar() {
     },
     {
       title: "Inbox",
-      url: "#",
+      url: user ? "/inbox" : "/join",
       icon: Inbox,
     },
     {
       title: "Notification",
-      url: "#",
+      url: user ? "/notification" : "/join",
       icon: Bell,
     },
     {
       title: "DarkMode",
-      url: "#",
       icon: Moon,
     },
-    {
-      title: getuser(),
-      url: "#",
-      icon: CgProfile,
-    },
-    {
-      title: "Logout",
-      url: "#",
-      icon: LogOut,
-      func: logOut,
-    },
   ];
-
 
   return (
     <Sidebar collapsible="icon" className="max-md:hidden">
@@ -87,17 +80,37 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="flex flex-col">
               {items.map((item) => (
-                <div
-                  key={item.title}
-                  className="flex items-center p-2"
-                  onClick={()=>item.func()}
-                >
+                <div key={item.title} className="flex items-center p-2">
                   <a href={item.url} className="flex items-center">
                     <item.icon size={18} className="mr-4" />{" "}
                     <span className="">{item.title}</span>
                   </a>
                 </div>
               ))}
+
+              {user ? (
+                <>
+                  <div className="flex items-center p-2">
+                    <a href={"/profile"} className="flex items-center">
+                      <CgProfile size={18} className="mr-4" />{" "}
+                      <span className="">{"jarvis"}</span>
+                    </a>
+                  </div>
+                  <div className="flex items-center p-2">
+                    <a href={"/profile"} className="flex items-center">
+                      <LogOut size={18} className="mr-4" />{" "}
+                      <span className="">{"Logout"}</span>
+                    </a>
+                  </div>
+                </>
+              ) : (
+                <div className="flex items-center p-2">
+                  <a href={"/join"} className="flex items-center">
+                    <LogIn size={18} className="mr-4" />{" "}
+                    <span className="">{"Login"}</span>
+                  </a>
+                </div>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

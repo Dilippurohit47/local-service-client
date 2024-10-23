@@ -1,18 +1,32 @@
+import { logout } from "@/lib/features/UserReducer";
 import { Separator } from "@radix-ui/react-separator";
 import Link from "next/link";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "sonner";
 
 const DropDownBox = () => {
+  const dispatch = useDispatch();
   const logOut = async () => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/api/v1/user/sign-out`,
-      {
-        method: "POST",
-        credentials: "include",
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER}/api/v1/user/sign-out`,
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+      if (data && data.success) {
+        console.log("in data");
+        dispatch(logout());
+
+        toast.success(data.message);
       }
-    );
-    const data = await res.json();
-    console.log(data);
+    } catch (error) {
+      toast.error("Internal server error");
+    }
   };
 
   return (
