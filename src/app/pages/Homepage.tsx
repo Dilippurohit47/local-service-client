@@ -1,6 +1,6 @@
 "use client";
 import ServicamanCard from "@/components/my-components/ServicamanCard";
-import { login } from "@/lib/features/UserReducer";
+import { login, saveUser } from "@/lib/features/UserReducer";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { fetcher } from "@/lib/utils";
 import { Star } from "lucide-react";
@@ -17,10 +17,10 @@ const Homepage = () => {
   useEffect(() => {
     if (data) {
       dispatch(login(data.token));
+      dispatch(saveUser(data.user));
     }
   }, [data]);
 
-  const val = useAppSelector((state) => state.userReducer);
   return (
     <div className="h-screen mt-16 bg-[#FAFAFA] w-[95vw] max-md:w-screen    ">
       <h1 className="font-semibold ml-4 md:text-3xl text-xl flex items-center gap-2  ">

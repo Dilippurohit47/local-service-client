@@ -7,18 +7,18 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoMoonOutline } from "react-icons/io5";
 import { MdOutlineMenu } from "react-icons/md";
 import SearchBar from "./SearchBar";
+import { useAppSelector } from "@/lib/hooks";
 const Header = () => {
   const { open, toggleSidebar } = useSidebar();
+
+  const user = useAppSelector((state) => state.userReducer.User);
+
   return (
     <nav
       className={`bg-[#FAFAFA]  fixed top-0 right-0  overflow-hidden flex md:justify-between items-center border-b border-opacity-50 md:pr-10 md:pl-5 px-2  py-2 transition-all duration-200 ${
         open ? "w-full  lg:w-[calc(100%-180px)]" : "w-full lg:w-[92.1rem]  "
       }`}
     >
-
-
-
-
       <div className="flex gap-5   items-center ">
         <MdOutlineMenu
           size={22}
@@ -44,7 +44,7 @@ const Header = () => {
         <Separator className="h-6 w-[1px] bg-gray-400" orientation="vertical" />
         <div className="flex gap-3 items-center">
           <CgProfile size={22} />
-          <span className="text-[1rem] font-normal"> Dilip</span>
+          <span className="text-[1rem] font-normal"> {user?.name}</span>
         </div>
       </div>
     </nav>
