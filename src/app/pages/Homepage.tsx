@@ -21,7 +21,6 @@ const Homepage = () => {
   }, [data]);
 
   const val = useAppSelector((state) => state.userReducer);
-  console.log("val", val);
   return (
     <div className="h-screen mt-16 bg-[#FAFAFA] w-[95vw] max-md:w-screen    ">
       <h1 className="font-semibold ml-4 md:text-3xl text-xl flex items-center gap-2  ">
