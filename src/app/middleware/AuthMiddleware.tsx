@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/lib/hooks";
+import Loader from "@/components/my-components/Loader";
 
 const AuthMiddleware = ({ children }) => {
   const val = useAppSelector((state) => state.userReducer);
@@ -15,7 +16,7 @@ const AuthMiddleware = ({ children }) => {
   }, [token, router]);
 
   if (token) {
-    return null;
+    return <Loader />;
   }
 
   return <>{children}</>;
