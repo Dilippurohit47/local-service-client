@@ -9,6 +9,8 @@ import { IoMoonOutline } from "react-icons/io5";
 import { MdOutlineMenu } from "react-icons/md";
 import DropDownBox from "./DropDownBox";
 import SearchBar from "./SearchBar";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 const Header = () => {
   const { open, toggleSidebar } = useSidebar();
@@ -59,20 +61,24 @@ const Header = () => {
           className="h-6  w-[1px] bg-gray-400"
           orientation="vertical"
         />
-        <div className="flex relative gap-3 items-center">
-          <Avatar
-            ref={boxref}
-            className="h-7 w-7 cursor-pointer"
-            onClick={() => setShowBox(!showBox)}
-          >
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <span className="text-[1rem] font-medium">
-            {user ? user.name : "Login"}
-          </span>
-          {showBox && <DropDownBox />}
-        </div>
+        {user ? (
+          <div className="flex relative gap-3 items-center">
+            <Avatar
+              ref={boxref}
+              className="h-7 w-7 cursor-pointer"
+              onClick={() => setShowBox(!showBox)}
+            >
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <span className="text-[1rem] font-medium">{user.name}</span>
+            {showBox && <DropDownBox />}
+          </div>
+        ) : (
+          <Link href={"/join"}>
+            <Button className="bg-blue-500 hover:bg-blue-600">Login</Button>
+          </Link>
+        )}
       </div>
     </nav>
   );

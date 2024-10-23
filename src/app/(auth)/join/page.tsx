@@ -13,7 +13,7 @@ const Page = () => {
       </h1>
       <div className=" h-2/4 w-[270px] sm:w-[300px] flex flex-col gap-5 md:flex-row   md:w-[600px] md:h-[150px]">
         <div
-          className={`flex flex-col gap-5 px-4 py-4 w-full border-[3px] rounded-lg ${
+          className={`flex flex-col gap-5 px-4 py-4 w-full border-[3px] rounded-lg cursor-pointer ${
             joinAs === 1 && "border-blue-400  border-opacity-60"
           }`}
           onClick={() => setJoinAs(1)}
@@ -33,10 +33,8 @@ const Page = () => {
           </h3>
         </div>
 
-        {/* service man box */}
-
         <div
-          className={`flex flex-col gap-5 px-4 py-4 w-full border-[3px] rounded-lg ${
+          className={`flex flex-col gap-5 px-4 py-4 w-full border-[3px] rounded-lg cursor-pointer ${
             joinAs === 2 && "border-blue-400  border-opacity-60"
           }`}
           onClick={() => setJoinAs(2)}
