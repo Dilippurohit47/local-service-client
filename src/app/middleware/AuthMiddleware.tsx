@@ -1,12 +1,13 @@
 "use client";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "@/lib/hooks";
+import { useAppSelector } from "@/lib/redux/hooks";
 import Loader from "@/components/my-components/Loader";
 
 const AuthMiddleware = ({ children }) => {
   const val = useAppSelector((state) => state.userReducer);
-  const token = val.userToken;
+  console.log(val);
+  const token = val?.userToken;
   const router = useRouter();
 
   useEffect(() => {

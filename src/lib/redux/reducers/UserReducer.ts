@@ -1,5 +1,4 @@
 "use client";
-
 import { createSlice } from "@reduxjs/toolkit";
 interface User {
   id: string;
@@ -7,13 +6,13 @@ interface User {
   email: string;
 }
 interface CounterState {
-  userToken: string;
+  userToken: string | null;
   isloggedIn: boolean;
   user: User | null;
 }
 
 const initialState: CounterState = {
-  userToken: "0",
+  userToken: null,
   isloggedIn: false,
   user: null,
 };
@@ -23,7 +22,7 @@ export const userReducer = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.userToken = "";
+      state.userToken = null;
       state.isloggedIn = false;
       state.user = null;
     },

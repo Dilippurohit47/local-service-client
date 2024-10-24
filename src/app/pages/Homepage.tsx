@@ -1,12 +1,11 @@
 "use client";
 import ServicamanCard from "@/components/my-components/ServicamanCard";
-import { login, saveUser } from "@/lib/features/UserReducer";
-import { useAppDispatch } from "@/lib/hooks";
+import { login, saveUser } from "@/lib/redux/reducers/UserReducer";
+import { useAppDispatch } from "@/lib/redux/hooks";
 import { fetcher } from "@/lib/utils";
 import { Star } from "lucide-react";
 import { useEffect } from "react";
 import useSWR from "swr";
-
 const Homepage = () => {
   const dispatch = useAppDispatch();
 

@@ -11,15 +11,16 @@ import {
 import { Bell, Home, Inbox, LogIn, LogOut, Moon } from "lucide-react";
 import { CgProfile } from "react-icons/cg";
 
-import { logout } from "@/lib/features/UserReducer";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { logout } from "@/lib/redux/reducers/UserReducer";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { RxCross1 } from "react-icons/rx";
 import { toast } from "sonner";
 import { useSidebar } from "../ui/sidebar";
+import Link from "next/link";
 
 export function AppSidebar() {
   const { toggleSidebar } = useSidebar();
-  const user = useAppSelector((state) => state.userReducer.user);
+  const user = useAppSelector((state) => state.userReducer?.user);
 
   const dispatch = useAppDispatch();
   const logOut = async () => {
@@ -80,36 +81,46 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="flex flex-col">
               {items.map((item) => (
-                <div key={item.title} className="flex items-center p-2">
-                  <a href={item.url} className="flex items-center">
+                <Link
+                  href={item?.url || "#"}
+                  key={item.title}
+                  className="flex items-center p-2 w-full hover:bg-purple-400 rounded-lg"
+                >
+                  <div className="flex items-center">
                     <item.icon size={18} className="mr-4" />{" "}
                     <span className="">{item.title}</span>
-                  </a>
-                </div>
+                  </div>
+                </Link>
               ))}
 
               {user ? (
                 <>
-                  <div className="flex items-center p-2">
+                  <div className="flex items-center p-2  hover:bg-purple-400 rounded-lg">
                     <a href={"/profile"} className="flex items-center">
                       <CgProfile size={18} className="mr-4" />{" "}
                       <span className="">{"jarvis"}</span>
                     </a>
                   </div>
-                  <div className="flex items-center p-2">
-                    <a href={"/profile"} className="flex items-center">
+                  <div
+                    className="flex items-center  w-full  p-2 cursor-pointer  hover:bg-red-400 rounded-lg "
+                    onClick={logOut}
+                  >
+                    <div className="flex items-center  ">
                       <LogOut size={18} className="mr-4" />{" "}
                       <span className="">{"Logout"}</span>
-                    </a>
+                    </div>
                   </div>
                 </>
               ) : (
-                <div className="flex items-center p-2">
-                  <a href={"/join"} className="flex items-center">
+                <Link
+                  href={"/join"}
+                  className="flex items-center p-2  w-full hover:bg-purple-400 rounded-lg"
+                >
+                  <div className="flex items-center">
                     <LogIn size={18} className="mr-4" />{" "}
                     <span className="">{"Login"}</span>
-                  </a>
-                </div>
+                  </div>
+                </Link>
               )}
             </SidebarMenu>
           </SidebarGroupContent>

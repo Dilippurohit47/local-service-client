@@ -1,4 +1,4 @@
-import { logout } from "@/lib/features/UserReducer";
+import { logout } from "@/lib/redux/reducers/UserReducer";
 import { Separator } from "@radix-ui/react-separator";
 import Link from "next/link";
 import React from "react";
