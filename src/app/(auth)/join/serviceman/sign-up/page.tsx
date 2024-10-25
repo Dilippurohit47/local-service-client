@@ -1,28 +1,84 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
-import { IoEyeOffSharp } from "react-icons/io5";
-import { FaRegEye } from "react-icons/fa";
-import Link from "next/link";
-import { Plus } from "lucide-react";
-import { RxCross2 } from "react-icons/rx";
-import AuthMiddleware from "@/app/middleware/AuthMiddleware";
 import { serviceManSignUp } from "@/app/actions/serverActions";
+import AuthMiddleware from "@/app/middleware/AuthMiddleware";
+import Loader from "@/components/my-components/Loader";
+import { Plus } from "lucide-react";
+import Link from "next/link";
+import { ChangeEvent, useRef, useState } from "react";
+import { FaRegEye } from "react-icons/fa";
+import { IoEyeOffSharp } from "react-icons/io5";
+import { RxCross2 } from "react-icons/rx";
+import { toast } from "sonner";
 const Page = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
+  const fileInputRef = useRef(null);
   const [image, setImage] = useState<string | null>();
+  const [secure_url, setSecure_url] = useState<string | null>(null);
+  const [publicId, setPublicId] = useState<string | null>(null);
+  const [imageLoading, setImageLoading] = useState<boolean>(false);
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
-  const uploadImage = (e: ChangeEvent<HTMLInputElement>) => {
+  const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
+    console.log("uploadImage:");
+    setImageLoading(true);
     if (e.target.files && e.target.files.length > 0) {
       const image = e.target.files[0];
       const imageUrl = URL.createObjectURL(image);
       setImage(imageUrl);
+
+      const CLOUD_NAME = "dfzmam9tn";
+      const UPLOAD_PRESET = "linkroom";
+
+      const imageFormData = new FormData();
+      imageFormData.append("file", image);
+      imageFormData.append("upload_preset", UPLOAD_PRESET);
+
+      const cloudinaryRes = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: imageFormData,
+        }
+      );
+      const data = await cloudinaryRes.json();
+      setSecure_url(data.secure_url);
+      setPublicId(data.public_id);
+    }
+    setImageLoading(false);
+  };
+
+  const removeImg = async () => {
+    setImage(null);
+    if (publicId) {
+      await fetch("/api/cloudinary", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ publicId }),
+      });
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+      setPublicId(null);
+      setSecure_url(null);
     }
   };
 
-  const removeImg = () => {
-    setImage(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitLoading(true);
+    const formData = new FormData(e.target);
+    formData.append("secure_url", secure_url);
+    formData.append("public_id", publicId);
+    if (publicId || secure_url) {
+      await serviceManSignUp(formData);
+    } else {
+      toast.error("Upload Image");
+    }
+    setSubmitLoading(false);
   };
+  console.log(publicId, secure_url, image);
   return (
     <AuthMiddleware>
       <div className="w-full min-h-screen flex justify-center items-center bg-[#F8F8F8] ">
@@ -33,10 +89,15 @@ const Page = () => {
           <div className="text-sm font-normal mb-4 text-center text-[#1e0e4b]">
             Create new account as a service man
           </div>
-          <form className="flex flex-col gap-3" action={serviceManSignUp}>
+          <form
+            className="flex flex-col gap-3"
+            onSubmit={(e) => handleSubmit(e)}
+          >
             <div className="flex w-full items-center justify-center">
               <input
+                ref={fileInputRef}
                 type="file"
+                name="image"
                 className="hidden"
                 id="upload_image"
                 onChange={(e) => uploadImage(e)}
@@ -44,19 +105,25 @@ const Page = () => {
 
               {image ? (
                 <>
-                  <div className="relative">
-                    <img
-                      src={image}
-                      alt=""
-                      className="h-36  w-36 object-cover rounded-lg"
-                    />
-                    <div
-                      className="absolute top-2 right-2 text-white cursor-pointer"
-                      onClick={removeImg}
-                    >
-                      <RxCross2 size={22} />
+                  {imageLoading ? (
+                    <label className="  flex  bg-blue-100 h-36 rounded-tr-xl rounded-bl-xl w-36 items-center justify-center">
+                      <Loader />
+                    </label>
+                  ) : (
+                    <div className="relative">
+                      <img
+                        src={image}
+                        alt=""
+                        className="h-36  w-36 object-cover rounded-lg"
+                      />
+                      <div
+                        className="absolute top-2 right-2 bg-black rounded-full text-white cursor-pointer"
+                        onClick={removeImg}
+                      >
+                        <RxCross2 size={22} />
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </>
               ) : (
                 <label
@@ -172,9 +239,10 @@ const Page = () => {
             <div className="flex gap-5 max-md:flex-col mt-5">
               <button
                 type="submit"
+                disabled={submitLoading}
                 className="bg-[#7747ff] w-full  m-auto px-6 py-2 rounded text-white text-sm font-normal"
               >
-                Submit
+                {submitLoading ? "Submitting..." : "Submit"}
               </button>
             </div>
           </form>

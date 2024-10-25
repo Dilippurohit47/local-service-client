@@ -26,7 +26,6 @@ export const Signup: Function = async (formData: FormData) => {
       toast.error(Object.values(errorsArray[0])[0]);
     }
     if (data.error) {
-      console.log("in error");
       toast.error(data.error?.message);
     } else {
       toast.success(data.message);
@@ -80,6 +79,7 @@ export const serviceManSignUp = async (formData: FormData) => {
     const password = formData.get("password");
     const workingPhoneNo = formData.get("workingNo");
     const service = formData.get("services");
+    const secure_url = formData.get("secure_url");
     const serviceArray = typeof service === "string" ? service.split(" ") : [];
 
     const res = await fetch(
@@ -95,23 +95,20 @@ export const serviceManSignUp = async (formData: FormData) => {
           phoneNo,
           password,
           workingPhoneNo,
-          serviceArray,
+          services: serviceArray,
+          profileUrl: secure_url,
         }),
       }
     );
 
     const data = await res.json();
-    console.log(data);
-    if (data?.errors) {
-      const errorsObject = data.errors;
-      const errorsArray = Object.keys(errorsObject).map((key) => {
-        return { [key]: errorsObject[key] };
-      });
-      toast.error(Object.values(errorsArray[0])[0]);
-      console.log(errorsArray);
-    }
-    if (data.success) {
+    if (!data.success) {
+      toast.error(data.message);
+    } else {
       toast.success(data.message);
+      setTimeout(() => {
+        window.location.href = "/join/serviceman/sign-in";
+      }, 500);
     }
   } catch (error) {}
 };
