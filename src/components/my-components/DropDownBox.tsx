@@ -21,7 +21,6 @@ const DropDownBox = () => {
       if (data && data.success) {
         console.log("in data");
         dispatch(logout());
-
         toast.success(data.message);
       }
     } catch (error) {

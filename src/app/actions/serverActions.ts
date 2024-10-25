@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+
 export const Signup: Function = async (formData: FormData) => {
   const name = formData.get("name");
   const password = formData.get("password");
@@ -29,6 +30,9 @@ export const Signup: Function = async (formData: FormData) => {
       toast.error(data.error?.message);
     } else {
       toast.success(data.message);
+      setTimeout(() => {
+        window.location.href = "/join/user/sign-in";
+      }, 500);
     }
   } catch (error) {
     console.log("err", error);
@@ -111,4 +115,40 @@ export const serviceManSignUp = async (formData: FormData) => {
       }, 500);
     }
   } catch (error) {}
+};
+
+export const serviceManSignIn = async (formData: FormData) => {
+  try {
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const res = await fetch(`http://localhost:4000/api/v1/service/sign-in`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      toast.success(data.message, {
+        style: {
+          backgroundColor: "#4CAF50",
+          color: "#fff",
+        },
+      });
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 500);
+    } else {
+      toast.error(data.message);
+    }
+  } catch (error) {
+    toast.error("Internal server error");
+  }
 };

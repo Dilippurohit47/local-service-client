@@ -1,7 +1,7 @@
 "use client";
 import ServicamanCard from "@/components/my-components/ServicamanCard";
 import { login, saveUser } from "@/lib/redux/reducers/UserReducer";
-import { useAppDispatch } from "@/lib/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { fetcher } from "@/lib/utils";
 import { Star } from "lucide-react";
 import { useEffect } from "react";
@@ -13,6 +13,10 @@ const Homepage = () => {
     `${process.env.NEXT_PUBLIC_SERVER}/api/v1/user/cookie`,
     fetcher
   );
+
+  const token = useAppSelector((state) => state.userReducer.userToken);
+  console.log(token);
+  console.log(data);
   useEffect(() => {
     if (data) {
       dispatch(login(data.token));
