@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { RxCross2 } from "react-icons/rx";
 import AuthMiddleware from "@/app/middleware/AuthMiddleware";
+import { serviceManSignUp } from "@/app/actions/serverActions";
 const Page = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -32,7 +33,7 @@ const Page = () => {
           <div className="text-sm font-normal mb-4 text-center text-[#1e0e4b]">
             Create new account as a service man
           </div>
-          <form className="flex flex-col gap-3">
+          <form className="flex flex-col gap-3" action={serviceManSignUp}>
             <div className="flex w-full items-center justify-center">
               <input
                 type="file"
@@ -76,6 +77,7 @@ const Page = () => {
                   Full Name
                 </label>
                 <input
+                  name="name"
                   type="text"
                   id="email"
                   className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
@@ -89,8 +91,9 @@ const Page = () => {
                   Phone no
                 </label>
                 <input
+                  name="phoneNo"
                   type="text"
-                  id="password"
+                  id="phoneNo"
                   className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
                 />
               </div>
@@ -105,8 +108,9 @@ const Page = () => {
                   Email
                 </label>
                 <input
+                  name="email"
                   type="text"
-                  id="password"
+                  id="emial"
                   className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
                 />
               </div>
@@ -120,6 +124,7 @@ const Page = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
+                  name="password"
                   className="rounded border relative border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
                 />
                 <div
@@ -141,6 +146,7 @@ const Page = () => {
                   Services
                 </label>
                 <input
+                  name="services"
                   type="text"
                   id="password"
                   placeholder="what services do you provide?"
@@ -156,7 +162,7 @@ const Page = () => {
                 </label>
                 <input
                   type="text"
-                  id="password"
+                  name="workingNo"
                   placeholder="Phone number for clients."
                   className="rounded border relative border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
                 />

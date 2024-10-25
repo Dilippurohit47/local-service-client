@@ -7,7 +7,6 @@ import { AppSidebar } from "@/components/my-components/App-sidebar";
 import { Toaster } from "sonner";
 import StoreProvider from "./StoreProvider";
 
-import {store} from "../lib/redux/store"
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -30,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <StoreProvider store={store}> 
+    <StoreProvider>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}

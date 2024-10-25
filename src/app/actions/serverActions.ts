@@ -18,7 +18,6 @@ export const Signup: Function = async (formData: FormData) => {
       }),
     });
     const data = await res.json();
-    console.log(data);
     if (data?.errors) {
       const errorsObject = data.errors;
       const errorsArray = Object.keys(errorsObject).map((key) => {
@@ -71,4 +70,48 @@ export const UserSignIn = async (formData: FormData) => {
   } catch (error) {
     toast.error("Internal server error");
   }
+};
+
+export const serviceManSignUp = async (formData: FormData) => {
+  try {
+    const name = formData.get("name");
+    const phoneNo = formData.get("phoneNo");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const workingPhoneNo = formData.get("workingNo");
+    const service = formData.get("services");
+    const serviceArray = typeof service === "string" ? service.split(" ") : [];
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER}/api/v1/service/sign-up`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phoneNo,
+          password,
+          workingPhoneNo,
+          serviceArray,
+        }),
+      }
+    );
+
+    const data = await res.json();
+    console.log(data);
+    if (data?.errors) {
+      const errorsObject = data.errors;
+      const errorsArray = Object.keys(errorsObject).map((key) => {
+        return { [key]: errorsObject[key] };
+      });
+      toast.error(Object.values(errorsArray[0])[0]);
+      console.log(errorsArray);
+    }
+    if (data.success) {
+      toast.success(data.message);
+    }
+  } catch (error) {}
 };
