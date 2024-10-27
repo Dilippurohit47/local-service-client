@@ -69,8 +69,11 @@ const Page = () => {
         </Link>
         <h5>
           Already have an account?{" "}
-          <Link className="text-blue-400" href={"/join/user/sign-in"}>
-            LogIn
+          <Link
+            className="text-blue-400"
+            href={`/join/${joinAs === 1 ? "user" : "serviceman"}/sign-in`}
+          >
+            ` LogIn as {joinAs === 1 ? "user" : "serviceman"}`
           </Link>
         </h5>
       </div>

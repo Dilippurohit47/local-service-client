@@ -1,22 +1,34 @@
 "use client";
 import ServicamanCard from "@/components/my-components/ServicamanCard";
+import { useAppDispatch } from "@/lib/redux/hooks";
 import { login, saveUser } from "@/lib/redux/reducers/UserReducer";
-import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { fetcher } from "@/lib/utils";
 import { Star } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 const Homepage = () => {
   const dispatch = useAppDispatch();
+
+  const [services, setServices] = useState([]);
+
+  const { data: serviceData } = useSWR(
+    `${process.env.NEXT_PUBLIC_SERVER}/api/v1/services/getAll`,
+    fetcher
+  );
+
+  console.log(serviceData);
 
   const { data } = useSWR(
     `${process.env.NEXT_PUBLIC_SERVER}/api/v1/user/cookie`,
     fetcher
   );
 
-  const token = useAppSelector((state) => state.userReducer.userToken);
-  console.log(token);
-  console.log(data);
+  useEffect(() => {
+    if (serviceData) {
+      setServices(serviceData.data);
+    }
+  }, [serviceData]);
+
   useEffect(() => {
     if (data) {
       dispatch(login(data.token));
@@ -34,12 +46,9 @@ const Homepage = () => {
         />
       </h1>
       <div className="md:px-4 py-2 overflow-x-auto no-scrollbar flex gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5   w-full max-md:gap-4 items-center">
-        <ServicamanCard />
-        <ServicamanCard />
-        <ServicamanCard />
-        <ServicamanCard />
-        <ServicamanCard />
-        <ServicamanCard />
+        {services.map((item, i) => (
+          <ServicamanCard key={i} item={item} />
+        ))}
       </div>
     </div>
   );
