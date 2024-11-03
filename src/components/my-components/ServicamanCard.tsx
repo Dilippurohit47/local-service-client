@@ -14,7 +14,7 @@ const ServicamanCard = ({ item }: { item: serviceType }) => {
         <img
           src={item.profileUrl}
           alt="img"
-          className="object-scale-down rounded-2xl  h-40 w-full  "
+          className="object-center rounded-2xl  h-40 w-full  "
         />
       </div>
 

@@ -8,7 +8,6 @@ import { serviceManSignIn } from "@/app/actions/serverActions";
 
 const Page = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  console.log(showPassword);
   return (
     <AuthMiddleware>
       <div className="w-full h-screen flex justify-center items-center bg-[#F8F8F8]">

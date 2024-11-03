@@ -2,13 +2,15 @@
 import { serviceManSignUp } from "@/app/actions/serverActions";
 import AuthMiddleware from "@/app/middleware/AuthMiddleware";
 import Loader from "@/components/my-components/Loader";
+import SelectInputBox from "@/components/my-components/SelectInputBox";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { IoEyeOffSharp } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { toast } from "sonner";
+
 const Page = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const fileInputRef = useRef(null);
@@ -19,7 +21,6 @@ const Page = () => {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
   const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
-    console.log("uploadImage:");
     setImageLoading(true);
     if (e.target.files && e.target.files.length > 0) {
       const image = e.target.files[0];
@@ -65,7 +66,7 @@ const Page = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitLoading(true);
     const formData = new FormData(e.target);
@@ -78,7 +79,6 @@ const Page = () => {
     }
     setSubmitLoading(false);
   };
-  console.log(publicId, secure_url, image);
   return (
     <AuthMiddleware>
       <div className="w-full min-h-screen flex justify-center items-center bg-[#F8F8F8] ">
@@ -206,19 +206,7 @@ const Page = () => {
 
             <div className="flex gap-5 max-md:flex-col w-full">
               <div className="block relative w-full">
-                <label
-                  htmlFor="password"
-                  className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
-                >
-                  Services
-                </label>
-                <input
-                  name="services"
-                  type="text"
-                  id="password"
-                  placeholder="what services do you provide?"
-                  className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
-                />
+                <SelectInputBox />
               </div>
               <div className="block relative w-full">
                 <label
