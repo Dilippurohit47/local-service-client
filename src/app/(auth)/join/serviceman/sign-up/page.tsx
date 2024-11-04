@@ -206,6 +206,12 @@ const Page = () => {
 
             <div className="flex gap-5 max-md:flex-col w-full">
               <div className="block relative w-full">
+                <label
+                  htmlFor="password"
+                  className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
+                >
+                  Select your specialized services
+                </label>
                 <SelectInputBox />
               </div>
               <div className="block relative w-full">

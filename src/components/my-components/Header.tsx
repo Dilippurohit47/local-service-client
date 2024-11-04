@@ -11,7 +11,6 @@ import DropDownBox from "./DropDownBox";
 import SearchBar from "./SearchBar";
 import { Button } from "../ui/button";
 import Link from "next/link";
-
 const Header = () => {
   const { open, toggleSidebar } = useSidebar();
   const [showBox, setShowBox] = useState<boolean>(false);
@@ -24,9 +23,7 @@ const Header = () => {
         setShowBox(false);
       }
     };
-
     document.addEventListener("click", clickOutside);
-
     return () => {
       document.removeEventListener("click", clickOutside);
     };

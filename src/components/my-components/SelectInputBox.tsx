@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { HiSelector } from "react-icons/hi";
-
+import { RxCross2 } from "react-icons/rx";
 type options = {
   id: number;
   value: string;
@@ -9,6 +9,16 @@ type options = {
 const SelectInputBox = () => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const options = [
+    "Plumber",
+    "House Keeping",
+    "Care taker",
+    "Driver",
+    "Electrician",
+    "Plumber",
+    "House Keeping",
+    "Care taker",
+    "Driver",
+    "Electrician",
     "Plumber",
     "House Keeping",
     "Care taker",
@@ -45,14 +55,17 @@ const SelectInputBox = () => {
         {selectedValues.length > 0 ? (
           selectedValues.map((item) => (
             <span
-              className="bg-blue-200 p-1 cursor-pointer  "
+              className="bg-blue-200 flex gap-1 rounded-lg justify-center items-center px-1 cursor-pointer  "
               key={item.id}
               onClick={(e) => {
                 e.stopPropagation();
                 deleteItem(item.id);
               }}
             >
-              {item.value} x{" "}
+              {item.value}
+              <div className="translate-y-[1px] bg-red-500 rounded-full  text-white p-[1px]">
+                <RxCross2 />
+              </div>
             </span>
           ))
         ) : (
@@ -60,13 +73,14 @@ const SelectInputBox = () => {
         )}
       </div>
       <div
-        className="absolute top-5 right-2 text-center cursor-pointer "
+        className="absolute top-12 right-2 text-center cursor-pointer "
         onClick={() => setShowOptions(!showOptions)}
       >
+        {" "}
         <HiSelector />
       </div>
       {showOptions && (
-        <div className="flex flex-col absolute  mt-2 bg-[#DBEAFE] px-1 py-3 text-black w-[50%] rounded-lg">
+        <div className="flex flex-col absolute overflow-y-auto  mt-2 bg-[#DBEAFE] px-1 py-3 text-black w-[50%] rounded-lg">
           {options.map((o, index) => (
             <div
               className="cursor-pointer flex gap-2 hover:bg-white rounded-md px-1 "
