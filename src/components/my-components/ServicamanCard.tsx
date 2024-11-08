@@ -8,7 +8,6 @@ export interface serviceType {
 }
 
 const ServicamanCard = ({ item }: { item: serviceType }) => {
-  console.log("item",item)
   return (
     <div className="   w-64 h-70 bg-white   rounded-2xl border-2 cursor-pointer px-2 py-3 flex flex-col gap-3 ">
       <div className="flex justify-center items-center  ">

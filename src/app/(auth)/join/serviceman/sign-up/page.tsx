@@ -20,9 +20,10 @@ const Page = () => {
   const [imageLoading, setImageLoading] = useState<boolean>(false);
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
+  
   const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
     setImageLoading(true);
-    if (e.target.files && e.target.files.length > 0) {
+    if (e.target.files && e.target.files.length > 0) {  
       const image = e.target.files[0];
       const imageUrl = URL.createObjectURL(image);
       setImage(imageUrl);

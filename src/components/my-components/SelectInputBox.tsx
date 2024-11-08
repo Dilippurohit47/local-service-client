@@ -27,7 +27,7 @@ const SelectInputBox = () => {
   ];
 
   const [selectedValues, setSelectedValues] = useState<options[]>([]);
-  console.log(selectedValues);
+
   const makeNewValues = (item: string, id: number) => {
     return {
       id: id,
@@ -47,7 +47,7 @@ const SelectInputBox = () => {
     setSelectedValues(filter);
   };
   return (
-    <div className=" w-[300px] no-scrollbar">
+    <div className=" w-[300px] overflow-x-auto no-scrollbar">
       <div
         onClick={() => setShowOptions(!showOptions)}
         className=" px-2 py-3 border cursor-pointer  overflow-x-auto overflow-y-hidden  no-scrollbar    whitespace-nowrap  flex gap-2 border-gray-300 rounded-md "
@@ -80,7 +80,7 @@ const SelectInputBox = () => {
         <HiSelector />
       </div>
       {showOptions && (
-        <div className="flex flex-col absolute h-48 no-scrollbar overflow-x-auto  mt-2 bg-[#DBEAFE] px-1 py-3 text-black w-[50%] rounded-lg">
+        <div className="flex flex-col absolute h-48 no-scrollbar overflow-y-auto  mt-2 bg-[#DBEAFE] px-1 py-3 text-black w-[50%] rounded-lg">
           {options.map((o, index) => (
             <div
               className="cursor-pointer flex gap-2 hover:bg-white rounded-md px-1 "
