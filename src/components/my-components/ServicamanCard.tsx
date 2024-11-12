@@ -9,7 +9,7 @@ export interface serviceType {
 
 const ServicamanCard = ({ item }: { item: serviceType }) => {
   return (
-    <div className="   w-64 h-70 bg-white   rounded-2xl border-2 cursor-pointer px-2 py-3 flex flex-col gap-3 ">
+    <div className="   w-64 min-h-[15.5rem] bg-white   rounded-2xl border-2 cursor-pointer px-2 py-3 flex flex-col gap-3 ">
       <div className="flex justify-center items-center  ">
         <img
           src={item?.profileUrl}

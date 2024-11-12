@@ -16,7 +16,6 @@ const Homepage = () => {
     fetcher
   );
 
-  console.log(serviceData);
 
   const { data } = useSWR(
     `${process.env.NEXT_PUBLIC_SERVER}/api/v1/user/cookie`,
