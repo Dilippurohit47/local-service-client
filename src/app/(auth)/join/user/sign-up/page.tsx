@@ -8,7 +8,6 @@ import AuthMiddleware from "@/app/middleware/AuthMiddleware";
 
 const Page = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
   return (
     <AuthMiddleware>
       <div className="w-full h-screen flex justify-center items-center bg-[#F8F8F8] ">
@@ -23,9 +22,7 @@ const Page = () => {
             <div className="flex flex-row w-full gap-6 justify-center items-center ">
               <div className="flex w-full flex-col gap-2">
                 <div className="block relative">
-                  <label
-                    className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
-                  >
+                  <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
                     Name
                   </label>
                   <input
@@ -35,9 +32,7 @@ const Page = () => {
                   />
                 </div>
                 <div className="block relative">
-                  <label
-                    className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
-                  >
+                  <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
                     Phone no
                   </label>
                   <input
@@ -79,10 +74,7 @@ const Page = () => {
               {/* Address */}
               <div className="flex   w-full flex-col gap-2">
                 <div className="block relative">
-                  <label
-                    htmlFor="email"
-                    className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
-                  >
+                  <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
                     Country
                   </label>
                   <input
@@ -92,14 +84,11 @@ const Page = () => {
                   />
                 </div>
                 <div className="block relative">
-                  <label
-                    htmlFor="password"
-                    className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
-                  >
+                  <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
                     State
                   </label>
                   <input
-                    name="State"
+                    name="state"
                     type="text"
                     className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
                   />
@@ -116,10 +105,10 @@ const Page = () => {
                 </div>
                 <div className="block relative">
                   <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
-                    Full address
+                    Pincode
                   </label>
                   <input
-                    name="address"
+                    name="pincode"
                     type="text"
                     className="rounded border  border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
                   />

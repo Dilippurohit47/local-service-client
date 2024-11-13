@@ -5,6 +5,10 @@ export const Signup: Function = async (formData: FormData) => {
   const password = formData.get("password");
   const email = formData.get("email");
   const phoneNo = formData.get("phoneNo");
+  const country = formData.get("country");
+  const city = formData.get("city");
+  const state = formData.get("state");
+  const pincode = formData.get("pincode");
   try {
     const res = await fetch(`http://localhost:4000/api/v1/user/sign-up`, {
       method: "POST",
@@ -16,18 +20,20 @@ export const Signup: Function = async (formData: FormData) => {
         email,
         password,
         phoneNo,
+        city,
+        state,
+        pincode,
+        country,
       }),
     });
     const data = await res.json();
-    if (data?.errors) {
-      const errorsObject = data.errors;
-      const errorsArray = Object.keys(errorsObject).map((key) => {
-        return { [key]: errorsObject[key] };
-      });
-      toast.error(Object.values(errorsArray[0])[0]);
-    }
-    if (data.error) {
-      toast.error(data.error?.message);
+    console.log(data);
+    if (!data.success) {
+      if (data.errors) {
+        toast.error(data.errors[0]);
+      } else {
+        toast.error(data.error.message);
+      }
     } else {
       toast.success(data.message);
       setTimeout(() => {
