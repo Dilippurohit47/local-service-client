@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HiSelector } from "react-icons/hi";
 import { RxCross2 } from "react-icons/rx";
 type options = {
@@ -8,6 +8,25 @@ type options = {
 
 const SelectInputBox = () => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
+  const selectRef = useRef(null);
+
+  useEffect(() => {
+    const clickOutside = (event: MouseEvent) => {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setShowOptions(false);
+      }
+    };
+
+    document.addEventListener("click", clickOutside);
+
+    return () => {
+      document.removeEventListener("click", clickOutside);
+    };
+  }, []);
+
   const options = [
     "plumber",
     "house Keeping",
@@ -47,7 +66,7 @@ const SelectInputBox = () => {
     setSelectedValues(filter);
   };
   return (
-    <div className=" w-[300px] overflow-x-auto no-scrollbar">
+    <div className=" w-[300px] overflow-x-auto no-scrollbar " ref={selectRef}>
       <div
         onClick={() => setShowOptions(!showOptions)}
         className=" px-2 py-3 border cursor-pointer  overflow-x-auto overflow-y-hidden  no-scrollbar    whitespace-nowrap  flex gap-2 border-gray-300 rounded-md "
