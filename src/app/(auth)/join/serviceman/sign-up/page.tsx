@@ -2,7 +2,9 @@
 import { serviceManSignUp } from "@/app/actions/serverActions";
 import AuthMiddleware from "@/app/middleware/AuthMiddleware";
 import Loader from "@/components/my-components/Loader";
-import SelectInputBox from "@/components/my-components/SelectInputBox";
+import SelectInputBox, {
+  optionProps,
+} from "@/components/my-components/SelectInputBox";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
@@ -11,6 +13,33 @@ import { IoEyeOffSharp } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { toast } from "sonner";
 
+const options = [
+  "electrician",
+  "plumber",
+  "carpenter",
+  "painter",
+  "gardener",
+  "cleaning service",
+  "locksmith",
+  "handyman",
+  "HVAC technician",
+  "pest control",
+  "landscaper",
+  "appliance repair",
+  "moving service",
+  "roofer",
+  "pool cleaner",
+  "window cleaner",
+  "laundry service",
+  "furniture assembly",
+  "computer repair",
+  "home organizer",
+  "exterminator",
+  "chimney sweep",
+  "garage door repair",
+  "gutter cleaner",
+  "tree trimming",
+];
 const Page = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const fileInputRef = useRef(null);
@@ -19,11 +48,10 @@ const Page = () => {
   const [publicId, setPublicId] = useState<string | null>(null);
   const [imageLoading, setImageLoading] = useState<boolean>(false);
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-
-  
+  const [serviceValues, setServiceValues] = useState<optionProps>([]);
   const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
     setImageLoading(true);
-    if (e.target.files && e.target.files.length > 0) {  
+    if (e.target.files && e.target.files.length > 0) {
       const image = e.target.files[0];
       const imageUrl = URL.createObjectURL(image);
       setImage(imageUrl);
@@ -66,13 +94,14 @@ const Page = () => {
       setSecure_url(null);
     }
   };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitLoading(true);
     const formData = new FormData(e.target);
     formData.append("secure_url", secure_url);
     formData.append("public_id", publicId);
+    formData.append("services", JSON.stringify(serviceValues));
+
     if (publicId || secure_url) {
       await serviceManSignUp(formData);
     } else {
@@ -80,6 +109,7 @@ const Page = () => {
     }
     setSubmitLoading(false);
   };
+
   return (
     <AuthMiddleware>
       <div className="w-full min-h-screen flex justify-center items-center bg-[#F8F8F8] ">
@@ -208,12 +238,14 @@ const Page = () => {
             <div className="flex gap-5 max-md:flex-col w-full">
               <div className="block relative w-full">
                 <label
-                  htmlFor="password"
                   className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
                 >
                   Select your specialized services
                 </label>
-                <SelectInputBox />
+                <SelectInputBox
+                  options={options}
+                  saveValues={setServiceValues}
+                />
               </div>
               <div className="block relative w-full">
                 <label

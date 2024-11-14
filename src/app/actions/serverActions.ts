@@ -27,7 +27,6 @@ export const Signup: Function = async (formData: FormData) => {
       }),
     });
     const data = await res.json();
-    console.log(data);
     if (!data.success) {
       if (data.errors) {
         toast.error(data.errors[0]);
@@ -90,8 +89,6 @@ export const serviceManSignUp = async (formData: FormData) => {
     const workingPhoneNo = formData.get("workingNo");
     const service = formData.get("services");
     const secure_url = formData.get("secure_url");
-    const serviceArray = typeof service === "string" ? service.split(" ") : [];
-
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER}/api/v1/service/sign-up`,
       {
@@ -105,7 +102,7 @@ export const serviceManSignUp = async (formData: FormData) => {
           phoneNo,
           password,
           workingPhoneNo,
-          services: serviceArray,
+          services: service,
           profileUrl: secure_url,
         }),
       }

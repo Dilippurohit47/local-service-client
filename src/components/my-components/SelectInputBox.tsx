@@ -5,8 +5,14 @@ type options = {
   id: number;
   value: string;
 };
-
-const SelectInputBox = () => {
+export type optionProps = string[];
+const SelectInputBox = ({
+  options,
+  saveValues,
+}: {
+  options: optionProps;
+  saveValues: () => void;
+}) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const selectRef = useRef(null);
 
@@ -27,26 +33,7 @@ const SelectInputBox = () => {
     };
   }, []);
 
-  const options = [
-    "plumber",
-    "house Keeping",
-    "care taker",
-    "driver",
-    "electrician",
-    "plumber",
-    "house Keeping",
-    "care taker",
-    "driver",
-    "electrician",
-    "plumber",
-    "house Keeping",
-    "care taker",
-    "driver",
-    "electrician",
-  ];
-
   const [selectedValues, setSelectedValues] = useState<options[]>([]);
-
   const makeNewValues = (item: string, id: number) => {
     return {
       id: id,
@@ -57,14 +44,20 @@ const SelectInputBox = () => {
   const selectItem = (value: string, index: number) => {
     const exist = selectedValues.some((item) => item.id == index);
     if (!exist) {
-      makeNewValues(value, index);
-      setSelectedValues([...selectedValues, makeNewValues(value, index)]);
+      const newSelectedValue = makeNewValues(value, index);
+      setSelectedValues((prevSelectedValues) => {
+        const updatedValues = [...prevSelectedValues, newSelectedValue];
+        saveValues(updatedValues);
+        return updatedValues;
+      });
     }
   };
   const deleteItem = (id: number) => {
     const filter = selectedValues.filter((item) => item.id !== id);
     setSelectedValues(filter);
+    saveValues(filter);
   };
+
   return (
     <div className=" w-[300px] overflow-x-auto no-scrollbar " ref={selectRef}>
       <div
@@ -100,11 +93,13 @@ const SelectInputBox = () => {
       </div>
       {showOptions && (
         <div className="flex flex-col absolute h-48 no-scrollbar overflow-y-auto  mt-2 bg-[#DBEAFE] px-1 py-3 text-black w-[50%] rounded-lg">
-          {options.map((o, index) => (
+          {options?.map((o, index: number) => (
             <div
               className="cursor-pointer flex gap-2 hover:bg-white rounded-md px-1 "
               key={index}
-              onClick={() => selectItem(o, index)}
+              onClick={() => {
+                selectItem(o, index);
+              }}
             >
               <span>{index + 1}</span>
               <span>{o}</span>
