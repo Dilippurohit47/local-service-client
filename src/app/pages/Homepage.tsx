@@ -34,7 +34,6 @@ const Homepage = () => {
       dispatch(saveUser(data.user));
     }
   }, [data]);
-
   return (
     <div className="h-screen mt-16 bg-[#FAFAFA] w-[95vw] overflow-hidden  max-md:w-screen z-10    ">
       <h1 className="font-semibold ml-4 md:text-3xl text-xl flex items-center gap-2  ">

@@ -4,7 +4,12 @@ import { Star } from "lucide-react";
 export interface serviceType {
   name: string;
   profileUrl: string;
-  services: string[];
+  services: servicesType[];
+}
+
+interface servicesType {
+  id:string,
+  value:string,
 }
 
 const ServicamanCard = ({ item }: { item: serviceType }) => {
@@ -28,7 +33,7 @@ const ServicamanCard = ({ item }: { item: serviceType }) => {
         <div className="flex w-3/4 gap-2   ">
           <p className="truncate overflow-hidden ">
             {item?.services?.map((i, index) => (
-              <span key={index}>{i},</span>
+              <span key={index}>{i.value},</span>
             ))}
           </p>
         </div>
