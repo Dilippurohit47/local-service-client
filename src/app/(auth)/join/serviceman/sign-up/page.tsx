@@ -16,6 +16,7 @@ const options = [
   "electrician",
   "plumber",
   "carpenter",
+  "driver",
   "painter",
   "gardener",
   "cleaning service",
@@ -144,7 +145,8 @@ const Page = () => {
     formData.append("secure_url", secure_url);
     formData.append("public_id", publicId);
     formData.append("services", JSON.stringify(serviceValues));
-
+    formData.append("country", JSON.stringify(country));
+    console.log(country);
     if (publicId || secure_url) {
       await serviceManSignUp(formData);
     } else {
@@ -152,7 +154,6 @@ const Page = () => {
     }
     setSubmitLoading(false);
   };
-
   return (
     <AuthMiddleware>
       <div className="w-full min-h-screen flex justify-center items-center bg-[#F8F8F8] ">
@@ -325,7 +326,7 @@ const Page = () => {
                 </label>
                 <input
                   type="text"
-                  name="workingNo"
+                  name="state"
                   placeholder=""
                   className="rounded border relative border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
                 />
@@ -355,7 +356,7 @@ const Page = () => {
                 </label>
                 <input
                   type="text"
-                  name="workingNo"
+                  name="pincode"
                   placeholder="Enter your pincode ex:421032."
                   className="rounded border relative border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
                 />
