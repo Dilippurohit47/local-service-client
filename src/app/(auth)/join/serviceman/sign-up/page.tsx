@@ -12,7 +12,6 @@ import { FaRegEye } from "react-icons/fa";
 import { IoEyeOffSharp } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { toast } from "sonner";
-
 const options = [
   "electrician",
   "plumber",
@@ -40,6 +39,49 @@ const options = [
   "gutter cleaner",
   "tree trimming",
 ];
+const countries = [
+  "United States",
+  "Canada",
+  "United Kingdom",
+  "Australia",
+  "India",
+  "Germany",
+  "France",
+  "Italy",
+  "Japan",
+  "China",
+  "Brazil",
+  "Russia",
+  "Mexico",
+  "South Korea",
+  "South Africa",
+  "New Zealand",
+  "Argentina",
+  "Spain",
+  "Netherlands",
+  "Switzerland",
+  "Turkey",
+  "Saudi Arabia",
+  "Sweden",
+  "Norway",
+  "Denmark",
+  "Finland",
+  "Poland",
+  "Indonesia",
+  "Thailand",
+  "Vietnam",
+  "Malaysia",
+  "Philippines",
+  "Singapore",
+  "United Arab Emirates",
+  "Egypt",
+  "Nigeria",
+  "Kenya",
+  "Pakistan",
+  "Bangladesh",
+  "Chile",
+];
+
 const Page = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const fileInputRef = useRef(null);
@@ -49,6 +91,7 @@ const Page = () => {
   const [imageLoading, setImageLoading] = useState<boolean>(false);
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [serviceValues, setServiceValues] = useState<optionProps>([]);
+  const [country, setCountry] = useState<optionProps>([]);
   const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
     setImageLoading(true);
     if (e.target.files && e.target.files.length > 0) {
@@ -237,14 +280,13 @@ const Page = () => {
 
             <div className="flex gap-5 max-md:flex-col w-full">
               <div className="block relative w-full">
-                <label
-                  className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
-                >
+                <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
                   Select your specialized services
                 </label>
                 <SelectInputBox
                   options={options}
                   saveValues={setServiceValues}
+                  multiple={true}
                 />
               </div>
               <div className="block relative w-full">
@@ -258,6 +300,63 @@ const Page = () => {
                   type="text"
                   name="workingNo"
                   placeholder="Phone number for clients."
+                  className="rounded border relative border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-5 max-md:flex-col w-full">
+              <div className="block relative w-full">
+                <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+                  Select your Country
+                </label>
+                <SelectInputBox
+                  options={countries}
+                  saveValues={setCountry}
+                  multiple={false}
+                />
+              </div>
+              <div className="block relative w-full">
+                <label
+                  htmlFor="password"
+                  className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
+                >
+                  State
+                </label>
+                <input
+                  type="text"
+                  name="workingNo"
+                  placeholder=""
+                  className="rounded border relative border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
+                />
+              </div>
+            </div>
+            <div className="flex gap-5 max-md:flex-col w-full">
+              <div className="block relative w-full">
+                <label
+                  htmlFor="password"
+                  className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
+                >
+                  city
+                </label>
+                <input
+                  name="city"
+                  type="text"
+                  id="emial"
+                  className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
+                />
+              </div>
+              <div className="block relative w-full">
+                <label
+                  htmlFor="password"
+                  className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
+                >
+                  pincode
+                </label>
+                <input
+                  type="text"
+                  name="workingNo"
+                  placeholder="Enter your pincode ex:421032."
                   className="rounded border relative border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
                 />
               </div>

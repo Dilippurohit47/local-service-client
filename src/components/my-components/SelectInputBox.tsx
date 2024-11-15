@@ -9,13 +9,14 @@ export type optionProps = string[];
 const SelectInputBox = ({
   options,
   saveValues,
+  multiple,
 }: {
   options: optionProps;
   saveValues: () => void;
+  multiple:boolean
 }) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const selectRef = useRef(null);
-
   useEffect(() => {
     const clickOutside = (event: MouseEvent) => {
       if (
@@ -40,18 +41,27 @@ const SelectInputBox = ({
       value: item,
     };
   };
-
   const selectItem = (value: string, index: number) => {
-    const exist = selectedValues.some((item) => item.id == index);
+    const exist = selectedValues.some((item) => item.id === index);
+    
     if (!exist) {
       const newSelectedValue = makeNewValues(value, index);
+  
       setSelectedValues((prevSelectedValues) => {
-        const updatedValues = [...prevSelectedValues, newSelectedValue];
+        let updatedValues;
+  
+        if (multiple) {
+          updatedValues = [...prevSelectedValues, newSelectedValue];
+        } else {
+          updatedValues = [newSelectedValue];
+        }
+  
         saveValues(updatedValues);
         return updatedValues;
       });
     }
   };
+  
   const deleteItem = (id: number) => {
     const filter = selectedValues.filter((item) => item.id !== id);
     setSelectedValues(filter);
@@ -92,7 +102,7 @@ const SelectInputBox = ({
         <HiSelector />
       </div>
       {showOptions && (
-        <div className="flex flex-col absolute h-48 no-scrollbar overflow-y-auto  mt-2 bg-[#DBEAFE] px-1 py-3 text-black w-[50%] rounded-lg">
+        <div className="flex flex-col z-[999] absolute h-48 no-scrollbar overflow-y-auto  mt-2 bg-[#DBEAFE] px-1 py-3 text-black w-[50%] rounded-lg">
           {options?.map((o, index: number) => (
             <div
               className="cursor-pointer flex gap-2 hover:bg-white rounded-md px-1 "
