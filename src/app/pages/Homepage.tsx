@@ -37,7 +37,7 @@ const Homepage = () => {
   return (
     <div className="h-screen mt-16 bg-[#FAFAFA] w-[95vw] overflow-hidden  max-md:w-screen z-10    ">
       <h1 className="font-semibold ml-4 md:text-3xl text-xl flex items-center gap-2  ">
-        Best Service Providers{" "}
+        Best Service Providers Near You {" "}
         <Star
           className="text-yellow-400 md:translate-y-1 fill-yellow-400"
           size={18}

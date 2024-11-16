@@ -95,7 +95,7 @@ export const serviceManSignUp = async (formData: FormData) => {
     const secure_url = formData.get("secure_url");
 
     const countryData = JSON.parse(country);
-    const extractCountry = countryData[0]?.value; 
+    const extractCountry = countryData[0]?.value;
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER}/api/v1/service/sign-up`,
@@ -112,10 +112,10 @@ export const serviceManSignUp = async (formData: FormData) => {
           workingPhoneNo,
           services: service,
           profileUrl: secure_url,
-          country:extractCountry,
+          country: extractCountry,
           city,
           pincode,
-          state
+          state,
         }),
       }
     );
@@ -158,7 +158,7 @@ export const serviceManSignIn = async (formData: FormData) => {
         },
       });
       setTimeout(() => {
-        window.location.href = "/join/serviceman/sign-in";
+        window.location.href = "/";
       }, 500);
     } else {
       toast.error(data.message);

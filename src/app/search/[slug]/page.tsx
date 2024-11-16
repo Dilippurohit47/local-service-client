@@ -25,7 +25,7 @@ const page = () => {
     <div className="flex  flex-col gap-4 ml-5 w-full h-full mt-20">
       <h1 className="font-bold  text-3xl">{slug.split("%20").join(" ")}</h1>
       <div className="flex gap-4">
-        {services.length > 0 ? (
+        {services && services.length > 0 ? (
           isLoading ? (
             <div className="flex h-[80vh] w-screen items-center justify-center">
               <Loader />
