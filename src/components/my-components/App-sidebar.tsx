@@ -54,11 +54,7 @@ export function AppSidebar() {
       url: user ? "/inbox" : "/join",
       icon: Inbox,
     },
-    {
-      title: "Notification",
-      url: user ? "/notification" : "/join",
-      icon: Bell,
-    },
+
     {
       title: "DarkMode",
       icon: Moon,
@@ -98,7 +94,7 @@ export function AppSidebar() {
                   <div className="flex items-center p-2  hover:bg-purple-400 rounded-lg">
                     <a href={"/profile"} className="flex items-center">
                       <CgProfile size={18} className="mr-4" />{" "}
-                      <span className="">{"jarvis"}</span>
+                      <span className="">{user.name.split(" ")[0]}</span>
                     </a>
                   </div>
                   <div

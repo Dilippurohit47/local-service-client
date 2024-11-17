@@ -48,10 +48,9 @@ const Header = () => {
 
       <div className="md:flex gap-4 items-center hidden  ">
         <div className="flex items-center gap-4  ">
-          <LuMessageSquare  size={22} className="cursor-pointer"/>
           <IoMoonOutline size={22} className="cursor-pointer" />
           <div className="relative">
-            <IoIosNotificationsOutline size={22} className="cursor-pointer " />
+            <LuMessageSquare size={22} className="cursor-pointer" />
             <span className="h-4 w-4 bg-red-400  -top-1 -right-1 text-[10px] text-center text-white rounded-full  absolute">
               4
             </span>
