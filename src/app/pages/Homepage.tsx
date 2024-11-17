@@ -12,7 +12,7 @@ const Homepage = () => {
   const [services, setServices] = useState([]);
 
   const { data: serviceData } = useSWR(
-    `${process.env.NEXT_PUBLIC_SERVER}/api/v1/services//get-close-services/${user?.latitude}/${user?.longitude}/${user?.country}`,
+    `${process.env.NEXT_PUBLIC_SERVER}/api/v1/services/get-close-services/${user?.latitude}/${user?.longitude}/${user?.country}`,
     fetcher
   );
 

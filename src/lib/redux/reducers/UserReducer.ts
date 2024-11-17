@@ -1,15 +1,15 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;
   phoneNo: string;
-  city:string;
-  country:string;
-  latitude:String;
-  longitude:String;
-
+  state: string;
+  city: string;
+  country: string;
+  latitude: String;
+  longitude: String;
 }
 
 interface UserState {
