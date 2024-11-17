@@ -9,6 +9,8 @@ import { IoMoonOutline } from "react-icons/io5";
 import { MdOutlineMenu } from "react-icons/md";
 import DropDownBox from "./DropDownBox";
 import SearchBar from "./SearchBar";
+import { LuMessageSquare } from "react-icons/lu";
+
 import { Button } from "../ui/button";
 import Link from "next/link";
 const Header = () => {
@@ -46,6 +48,7 @@ const Header = () => {
 
       <div className="md:flex gap-4 items-center hidden  ">
         <div className="flex items-center gap-4  ">
+          <LuMessageSquare  size={22} className="cursor-pointer"/>
           <IoMoonOutline size={22} className="cursor-pointer" />
           <div className="relative">
             <IoIosNotificationsOutline size={22} className="cursor-pointer " />
