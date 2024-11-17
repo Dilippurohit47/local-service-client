@@ -104,8 +104,8 @@ const Page = () => {
                   />
                 </div>
                 <div className="block relative">
-                  <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
-                    Pincode
+                  <label className="block text-gray-600 cursor-text texwt-sm leading-[140%] font-normal mb-2">
+               residental address
                   </label>
                   <input
                     name="pincode"

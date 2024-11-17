@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { FiUsers } from "react-icons/fi";
 import { GrUserSettings } from "react-icons/gr";
 const Page = () => {
-  const [joinAs, setJoinAs] = useState<number>();
+  const [joinAs, setJoinAs] = useState<number>(1);
 
   return (
     <AuthMiddleware>

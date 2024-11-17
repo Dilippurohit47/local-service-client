@@ -5,7 +5,13 @@ interface User {
   name: string;
   email: string;
   phoneNo: string;
+  city:string;
+  country:string;
+  latitude:String;
+  longitude:String;
+
 }
+
 interface UserState {
   userToken: string | null;
   isloggedIn: boolean;
