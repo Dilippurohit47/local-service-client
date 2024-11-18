@@ -15,6 +15,7 @@ export const Signup: Function = async (formData: FormData) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         name,
         email,
@@ -36,7 +37,7 @@ export const Signup: Function = async (formData: FormData) => {
     } else {
       toast.success(data.message);
       setTimeout(() => {
-        window.location.href = "/join/user/sign-in";
+        window.location.href = "/";
       }, 500);
     }
   } catch (error) {

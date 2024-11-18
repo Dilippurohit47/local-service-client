@@ -8,15 +8,15 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
 } from "@/components/ui/sidebar";
-import { Bell, Home, Inbox, LogIn, LogOut, Moon } from "lucide-react";
+import { Home, Inbox, LogIn, LogOut, Moon } from "lucide-react";
 import { CgProfile } from "react-icons/cg";
 
-import { logout } from "@/lib/redux/reducers/UserReducer";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { logout } from "@/lib/redux/reducers/UserReducer";
+import Link from "next/link";
 import { RxCross1 } from "react-icons/rx";
 import { toast } from "sonner";
 import { useSidebar } from "../ui/sidebar";
-import Link from "next/link";
 
 export function AppSidebar() {
   const { toggleSidebar } = useSidebar();
